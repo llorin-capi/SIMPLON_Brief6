@@ -1,0 +1,29 @@
+-- SQLite
+
+-- clients ayant accepté le consentement marketing
+SELECT * FROM client
+WHERE Consentement_Marketing=1;
+
+-- commandes d'un client spécifique
+SELECT * FROM commande, client
+WHERE client.Client_ID=commande.Client_ID AND client.Client_ID=30;
+
+-- montant total des commandes du client ID=61
+SELECT client.Client_ID, sum(commande.Montant_Commande) FROM client, commande
+WHERE client.Client_ID=commande.Client_ID AND client.Client_ID=61;
+
+-- clients ayant passé des commandes >100€
+SELECT client.Nom, client.Prénom, SUM(commande.Montant_Commande) as Montant_Commande_Total 
+FROM client
+JOIN commande ON client.Client_ID = commande.Client_ID
+GROUP BY client.Nom, client.Prénom
+HAVING SUM(commande.Montant_Commande) > 100
+ORDER BY Montant_Commande_Total DESC;
+
+-- clients ayant passé des commandes depuis le 01/01/2023
+SELECT client.Nom, client.Prénom, MAX(commande.Date_Commande)
+FROM client
+JOIN commande ON client.Client_ID=commande.Client_ID 
+GROUP BY client.Nom, client.Prénom
+HAVING MAX(commande.Date_Commande)>'2023-01-01'
+ORDER BY MAX(commande.Date_Commande) DESC;
