@@ -6,3 +6,5 @@ L'objectif de ce brief est de créer une base de données à partir de deux fich
 ## Requirements
 * Visual Studio Code, avec l'extension Python et SQLite
 * 
+
+(https://www.drawdb.app/editor?shareId=8665ed7408c04e2738d18c6c5477669f)
